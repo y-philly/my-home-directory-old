@@ -1,0 +1,3 @@
+#!/bin/sh
+wget -O /cygdrive/c/setup-files/cygwin/setup-x86_64.exe https://www.cygwin.com/setup-x86_64.exe
+cygstart /cygdrive/c/setup-files/cygwin/setup-x86_64.exe
