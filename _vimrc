@@ -24,9 +24,15 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 "" plugins
 "
+NeoBundle 'houtsnip/vim-emacscommandline'
+NeoBundle 'kana/vim-operator-user'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'rhysd/clever-f.vim'
+NeoBundle 'rhysd/vim-operator-surround'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'tpope/vim-fugitive'
 
 " My Bundles here:
 " Refer to |:NeoBundle-examples|.
@@ -92,8 +98,8 @@ autocmd QuickFixCmdPost make,vimgrep,cscope if len(getqflist()) != 0 | copen | e
 
 "" status line
 "
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}][TYPE=%Y][ASCII=0x\%02.2B][POS=%l,%v][%p%%]%{fugitive#statusline()}
-"set laststatus=2
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}][TYPE=%Y][ASCII=0x\%02.2B][POS=%l,%v][%p%%]%{fugitive#statusline()}
+set laststatus=2
 
 "" remove unnecessary space
 "
@@ -103,6 +109,33 @@ autocmd BufWritePre * :%s/\s\+$//ge
 "
 noremap <C-N> :cn<CR>
 noremap <C-P> :cp<CR>
-noremap <Space>e :VimFilerCurrentDir<CR>
 noremap <Space>t :tabnew<CR>
 noremap! <C-H> <Backspace>
+
+"" plugin settings
+"
+" VimFiler
+"
+noremap <Space>e :VimFilerCurrentDir<CR>
+"
+" vim-operator-surround
+"
+map <silent>sa <Plug>(operator-surround-append)
+map <silent>sd <Plug>(operator-surround-delete)
+map <silent>sr <Plug>(operator-surround-replace)
+"
+" vim-easy-motion
+"
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_use_migemo = 1
+
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-s2)
+
+" Turn on case sensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
