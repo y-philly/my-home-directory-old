@@ -24,14 +24,21 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 "" plugins
 "
+NeoBundle 'cohama/agit.vim'
 NeoBundle 'houtsnip/vim-emacscommandline'
 NeoBundle 'kana/vim-operator-user'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'rhysd/vim-operator-surround'
 NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite-outline'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'soh335/unite-qflist'
 NeoBundle 'tpope/vim-fugitive'
 
 " My Bundles here:
@@ -177,6 +184,76 @@ endif
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 "let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+"
+" unite
+"
+" prefix key.
+nnoremap [unite] <Nop>
+nmap <Space>f [unite]
+
+" To track long mru history.
+let g:unite_source_file_mru_long_limit = 10000
+let g:unite_source_directory_mru_long_limit = 10000
+
+" For optimize.
+let g:unite_source_file_mru_filename_format = ''
+
+" Start in insert mode.
+let g:unite_enable_start_insert = 1
+
+" Change default action.
+" call unite#custom_default_action('source/bookmark/directory', 'vimfiler')
+call unite#custom_default_action('source/bookmark/directory', 'lcd')
+
+nnoremap <silent> [unite]b  :<C-u>Unite -buffer-name=bookmarks bookmark<CR>
+nnoremap <silent> [unite]l  :<C-u>Unite -buffer-name=files buffer file_mru file<CR>
+nnoremap <silent> [unite]o  :<C-u>Unite outline<CR>
+
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()"{{{
+  " Overwrite settings.
+  imap <buffer> jj      <Plug>(unite_insert_leave)
+endfunction"}}}
+
+let g:unite_source_menu_menus = get(g:,'unite_source_menu_menus',{})
+let g:unite_source_menu_menus.git = {
+  \ 'description' : '            gestionar repositorios git
+      \                            ⌘ [espacio]g',
+  \}
+let g:unite_source_menu_menus.git.command_candidates = [
+    \['▷ tig                                                        ⌘ ,gt',
+        \'normal ,gt'],
+    \['▷ git status       (Fugitive)                                ⌘ ,gs',
+        \'Gstatus'],
+    \['▷ git diff         (Fugitive)                                ⌘ ,gd',
+        \'Gdiff'],
+    \['▷ git commit       (Fugitive)                                ⌘ ,gc',
+        \'Gcommit'],
+    \['▷ git log          (Fugitive)                                ⌘ ,gl',
+        \'exe "silent Glog | Unite quickfix"'],
+    \['▷ git blame        (Fugitive)                                ⌘ ,gb',
+        \'Gblame'],
+    \['▷ git stage        (Fugitive)                                ⌘ ,gw',
+        \'Gwrite'],
+    \['▷ git checkout     (Fugitive)                                ⌘ ,go',
+        \'Gread'],
+    \['▷ git rm           (Fugitive)                                ⌘ ,gr',
+        \'Gremove'],
+    \['▷ git mv           (Fugitive)                                ⌘ ,gm',
+        \'exe "Gmove " input("destino: ")'],
+    \['▷ git push         (Fugitive, salida por buffer)             ⌘ ,gp',
+        \'Git! push'],
+    \['▷ git pull         (Fugitive, salida por buffer)             ⌘ ,gP',
+        \'Git! pull'],
+    \['▷ git prompt       (Fugitive, salida por buffer)             ⌘ ,gi',
+        \'exe "Git! " input("comando git: ")'],
+    \['▷ git cd           (Fugitive)',
+        \'Gcd'],
+    \]
+nnoremap <silent>[unite]g :Unite -silent -start-insert menu:git<CR>
+
+
 "
 " VimFiler
 "
@@ -190,6 +267,7 @@ call vimfiler#custom#profile('default', 'context', {
 map <silent>sa <Plug>(operator-surround-append)
 map <silent>sd <Plug>(operator-surround-delete)
 map <silent>sr <Plug>(operator-surround-replace)
+
 "
 " clever-f
 "
