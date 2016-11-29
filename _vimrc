@@ -41,15 +41,6 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'tpope/vim-fugitive'
 
@@ -78,6 +69,9 @@ set history=10000
 set undodir=~/var/vim/undo
 syntax on
 set backspace=indent,eol,start
+if has("win64")
+  set shell=cmd.exe
+endif
 
 "" spell check
 "
@@ -252,41 +246,6 @@ function! s:unite_my_settings()"{{{
 endfunction"}}}
 
 let g:unite_source_menu_menus = get(g:,'unite_source_menu_menus',{})
-let g:unite_source_menu_menus.git = {
-  \ 'description' : '            gestionar repositorios git
-      \                            ⌘ [espacio]g',
-  \}
-let g:unite_source_menu_menus.git.command_candidates = [
-    \['▷ tig                                                        ⌘ ,gt',
-        \'normal ,gt'],
-    \['▷ git status       (Fugitive)                                ⌘ ,gs',
-        \'Gstatus'],
-    \['▷ git diff         (Fugitive)                                ⌘ ,gd',
-        \'Gdiff'],
-    \['▷ git commit       (Fugitive)                                ⌘ ,gc',
-        \'Gcommit'],
-    \['▷ git log          (Fugitive)                                ⌘ ,gl',
-        \'exe "silent Glog | Unite quickfix"'],
-    \['▷ git blame        (Fugitive)                                ⌘ ,gb',
-        \'Gblame'],
-    \['▷ git stage        (Fugitive)                                ⌘ ,gw',
-        \'Gwrite'],
-    \['▷ git checkout     (Fugitive)                                ⌘ ,go',
-        \'Gread'],
-    \['▷ git rm           (Fugitive)                                ⌘ ,gr',
-        \'Gremove'],
-    \['▷ git mv           (Fugitive)                                ⌘ ,gm',
-        \'exe "Gmove " input("destino: ")'],
-    \['▷ git push         (Fugitive, salida por buffer)             ⌘ ,gp',
-        \'Git! push'],
-    \['▷ git pull         (Fugitive, salida por buffer)             ⌘ ,gP',
-        \'Git! pull'],
-    \['▷ git prompt       (Fugitive, salida por buffer)             ⌘ ,gi',
-        \'exe "Git! " input("comando git: ")'],
-    \['▷ git cd           (Fugitive)',
-        \'Gcd'],
-    \]
-nnoremap <silent>[unite]g :Unite -silent -start-insert menu:git<CR>
 
 "
 " VimFiler
@@ -325,3 +284,12 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+
+"-------------------------------------------------------------------------------
+" Solarized
+"-------------------------------------------------------------------------------
+let g:solarized_bold = 0
+let g:solarized_underline = 1
+let g:solarized_italic = 0
+let g:solarized_contrast = "high"
+let g:solarized_termtrans = 1
