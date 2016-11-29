@@ -1,0 +1,20 @@
+" _gvimrc for vim(1)
+"
+" Yasuhiro SHIMIZU  <yasuhiro.phil81.gmail.com>
+"
+
+" color
+set background=dark
+colorscheme solarized
+
+" window size
+"set columns=140
+"set lines=50
+
+" font
+set guifont=DejaVu_Sans_Mono:h10:cSHIFTJIS
+
+" GUI
+set guioptions+=a
+set guioptions-=m
+set guioptions-=T
