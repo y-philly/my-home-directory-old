@@ -285,9 +285,39 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
-"-------------------------------------------------------------------------------
+"
+" marching.vim
+"
+let g:marching_clang_command = "C:/LLVM/bin/clang.exe"
+let g:marching#clang_command#options = {
+\   "c"   : "-std=c99",
+\}
+if has("win64")
+let g:marching_include_paths = [
+\   "C:/cygwin64/lib/gcc/x86_64-pc-cygwin/5.4.0/include/c++",
+\   "C:/cygwin64/lib/gcc/x86_64-pc-cygwin/5.4.0/include/c++/x86_64-pc-cygwin",
+\   "C:/cygwin64/lib/gcc/x86_64-pc-cygwin/5.4.0/include/c++/backward",
+\   "C:/cygwin64/lib/gcc/x86_64-pc-cygwin/5.4.0/include",
+\   "C:/cygwin64/lib/gcc/x86_64-pc-cygwin/5.4.0/include-fixed",
+\   "C:/cygwin64/home/yasuhiro.shimizu/repositories/github/googletest/googletest/include",
+\   "C:/cygwin64/home/yasuhiro.shimizu/repositories/github/googletest/googlemock/include",
+\]
+endif
+let g:marching_enable_neocomplete = 1
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+set updatetime=200
+
+imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
+imap <buffer> <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
+
+"
 " Solarized
-"-------------------------------------------------------------------------------
+"
 let g:solarized_bold = 0
 let g:solarized_underline = 1
 let g:solarized_italic = 0
