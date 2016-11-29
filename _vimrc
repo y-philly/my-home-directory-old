@@ -13,10 +13,10 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+set runtimepath+=~/vimfiles/bundle/neobundle.vim/
 
 " Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/vimfiles/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -38,7 +38,6 @@ NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'Shougo/vimshell.vim'
-NeoBundle 'soh335/unite-qflist'
 NeoBundle 'tpope/vim-fugitive'
 
 " My Bundles here:
