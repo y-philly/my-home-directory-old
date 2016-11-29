@@ -26,9 +26,11 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'cohama/agit.vim'
+NeoBundle 'fuenor/im_control.vim'
 NeoBundle 'houtsnip/vim-emacscommandline'
 NeoBundle 'kana/vim-operator-user'
 NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'majutsushi/tagbar'
 NeoBundle 'osyo-manga/vim-marching'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'rhysd/clever-f.vim'
@@ -286,6 +288,11 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
 "
+" im_control
+"
+inoremap <silent> <C-j> <C-^><C-r>=IMState('FixMode')<CR>
+
+"
 " marching.vim
 "
 let g:marching_clang_command = "C:/LLVM/bin/clang.exe"
@@ -314,6 +321,13 @@ set updatetime=200
 
 imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
 imap <buffer> <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
+
+"
+" tagbar
+"
+let g:tagbar_sort = 0
+let g:tagbar_left = 1
+noremap <Space>l :Tagbar<CR>
 
 "
 " Solarized
