@@ -35,6 +35,7 @@ NeoBundle 'osyo-manga/vim-marching'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'rhysd/vim-operator-surround'
+NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'thinca/vim-visualstar'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
@@ -297,6 +298,7 @@ inoremap <silent> <C-j> <C-^><C-r>=IMState('FixMode')<CR>
 "
 let g:marching_clang_command = "C:/LLVM/bin/clang.exe"
 let g:marching#clang_command#options = {
+\   "cpp" : "-std=c++14",
 \   "c"   : "-std=c99",
 \}
 if has("win64")
