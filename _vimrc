@@ -24,12 +24,16 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 "" plugins
 "
+NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'cohama/agit.vim'
 NeoBundle 'houtsnip/vim-emacscommandline'
 NeoBundle 'kana/vim-operator-user'
 NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'osyo-manga/vim-marching'
+NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'rhysd/vim-operator-surround'
+NeoBundle 'thinca/vim-visualstar'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neosnippet.vim'
@@ -37,6 +41,15 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'tpope/vim-fugitive'
 
@@ -185,6 +198,29 @@ endif
 "let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 "
+" neosnippet
+"
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+" My snippets directory
+let g:neosnippet#snippets_directory = '~/snippets'
+
+"
 " unite
 "
 " prefix key.
@@ -252,7 +288,6 @@ let g:unite_source_menu_menus.git.command_candidates = [
     \]
 nnoremap <silent>[unite]g :Unite -silent -start-insert menu:git<CR>
 
-
 "
 " VimFiler
 "
@@ -260,6 +295,7 @@ noremap <Space>e :VimFilerCurrentDir<CR>
 call vimfiler#custom#profile('default', 'context', {
 \   'safe' : 0
 \ })
+
 "
 " vim-operator-surround
 "
@@ -272,6 +308,7 @@ map <silent>sr <Plug>(operator-surround-replace)
 "
 let g:clever_f_smart_case = 1
 let g:clever_f_use_migemo = 1
+
 "
 " vim-easy-motion
 "
