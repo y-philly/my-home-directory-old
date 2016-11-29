@@ -25,8 +25,10 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "" plugins
 "
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'cohama/agit.vim'
 NeoBundle 'fuenor/im_control.vim'
+NeoBundle 'godlygeek/tabular'
 NeoBundle 'houtsnip/vim-emacscommandline'
 NeoBundle 'kana/vim-operator-user'
 NeoBundle 'Lokaltog/vim-easymotion'
