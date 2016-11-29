@@ -301,6 +301,7 @@ let g:marching#clang_command#options = {
 \}
 if has("win64")
 let g:marching_include_paths = [
+\   "C:/cygwin64/usr/include",
 \   "C:/cygwin64/lib/gcc/x86_64-pc-cygwin/5.4.0/include/c++",
 \   "C:/cygwin64/lib/gcc/x86_64-pc-cygwin/5.4.0/include/c++/x86_64-pc-cygwin",
 \   "C:/cygwin64/lib/gcc/x86_64-pc-cygwin/5.4.0/include/c++/backward",
