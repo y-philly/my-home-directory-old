@@ -125,6 +125,7 @@ autocmd BufWritePre * :%s/\s\+$//ge
 
 "" key mapping
 "
+noremap <C-G> :vimgrep <C-R>=expand("<cword>")<CR> **/*
 noremap <C-N> :cn<CR>
 noremap <C-P> :cp<CR>
 noremap <Space>t :tabnew<CR>
