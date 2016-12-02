@@ -128,7 +128,16 @@ autocmd BufWritePre * :%s/\s\+$//ge
 noremap <C-G> :vimgrep <C-R>=expand("<cword>")<CR> **/*
 noremap <C-N> :cn<CR>
 noremap <C-P> :cp<CR>
+noremap <C-Space>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+noremap <C-Space>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+noremap <C-Space>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+noremap <C-Space>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+noremap <C-Space>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+noremap <C-Space>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+noremap <C-Space>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+noremap <C-Space>d :scs find d <C-R>=expand("<cword>")<CR><CR>
 noremap <Space>t :tabnew<CR>
+noremap <silent> <F6> :call GenCscopeOut()<CR><CR>
 noremap! <C-H> <Backspace>
 
 "" plugin settings
