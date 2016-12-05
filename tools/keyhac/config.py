@@ -226,7 +226,7 @@ def configure(keymap):
 
 
     # For Edit box, assigning Delete to C-D, etc
-    if 1:
+    if 0:
         keymap_edit = keymap.defineWindowKeymap( class_name="Edit" )
 
         keymap_edit[ "C-D" ] = "Delete"              # Delete
@@ -258,6 +258,9 @@ def configure(keymap):
         keymap_app[ "A-B" ] = "C-Left"              # Word left
         keymap_app[ "C-V" ] = "PageDown"            # Page down
         keymap_app[ "A-V" ] = "PageUp"              # page up
+        keymap_app[ "C-D" ] = "Delete"              # Delete
+        keymap_app[ "C-H" ] = "Back"                # Backspace
+        keymap_app[ "C-K" ] = "S-End","C-X"         # Removing following text
         keymap_app[ "A-Comma" ] = "C-Home"          # Beginning of the document
         keymap_app[ "A-Period" ] = "C-End"          # End of the document
         keymap_app[ "C-X" ][ "C-F" ] = "C-O"        # Open file
