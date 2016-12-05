@@ -25,7 +25,7 @@ def configure(keymap):
     # Customizing the display
 
     # Font
-    keymap.setFont( "MS Gothic", 12 )
+    keymap.setFont( "DejaVu Sans Mono", 13 )
 
     # Theme
     keymap.setTheme("black")
@@ -34,7 +34,7 @@ def configure(keymap):
 
     # Simple key replacement
     keymap.replaceKey( "LWin", 235 )
-    keymap.replaceKey( "RWin", 255 )
+    #keymap.replaceKey( "RWin", 255 )
 
     # User modifier key definition
     keymap.defineModifier( 235, "User0" )
@@ -76,12 +76,12 @@ def configure(keymap):
 
 
     # USER0-F1 : Test of launching application
-    if 1:
+    if 0:
         keymap_global[ "U0-F1" ] = keymap.ShellExecuteCommand( None, "notepad.exe", "", "" )
 
 
     # USER0-F2 : Test of sub thread execution using JobQueue/JobItem
-    if 1:
+    if 0:
         def command_JobTest():
 
             def jobTest(job_item):
@@ -106,12 +106,12 @@ def configure(keymap):
 
 
     # USER0-F : Activation of specific window
-    if 1:
+    if 0:
         keymap_global[ "U0-F" ] = keymap.ActivateWindowCommand( "cfiler.exe", "CfilerWindowClass" )
 
 
     # USER0-E : Activate specific window or launch application if the window doesn't exist
-    if 1:
+    if 0:
         def command_ActivateOrExecuteNotepad():
             wnd = Window.find( "Notepad", None )
             if wnd:
@@ -127,7 +127,7 @@ def configure(keymap):
 
 
     # Ctrl-Tab : Switching between console related windows
-    if 1:
+    if 0:
 
         def isConsoleWindow(wnd):
             if wnd.getClassName() in ("PuTTY","MinTTY","CkwWindowClass"):
@@ -193,7 +193,7 @@ def configure(keymap):
 
 
     # USER0-Alt-Up/Down/Left/Right/Space/PageUp/PageDown : Virtul mouse operation by keyboard
-    if 1:
+    if 0:
         keymap_global[ "U0-A-Left"  ] = keymap.MouseMoveCommand(-10,0)
         keymap_global[ "U0-A-Right" ] = keymap.MouseMoveCommand(10,0)
         keymap_global[ "U0-A-Up"    ] = keymap.MouseMoveCommand(0,-10)
@@ -207,7 +207,7 @@ def configure(keymap):
 
 
     # Execute the System commands by sendMessage
-    if 1:
+    if 0:
         def close():
             wnd = keymap.getTopLevelWindow()
             wnd.sendMessage( WM_SYSCOMMAND, SC_CLOSE )
@@ -234,38 +234,44 @@ def configure(keymap):
         keymap_edit[ "C-K" ] = "S-End","C-X"         # Removing following text
 
 
-    # Customize Notepad as Emacs-ish
-    # Because the keymap condition of keymap_edit overlaps with keymap_notepad,
+    # Customize some applications as Emacs-ish
+    # Because the keymap condition of keymap_edit overlaps with keymap_app,
     # both these two keymaps are applied in mixed manner.
     if 1:
-        keymap_notepad = keymap.defineWindowKeymap( exe_name="notepad.exe", class_name="Edit" )
+        def isExceptationApp(window):
+            if window.getProcessName() in ("mintty.exe", "gvim.exe"):
+                return False
+            return True
+
+        keymap_app = keymap.defineWindowKeymap( check_func = isExceptationApp )
 
         # Define Ctrl-X as the first key of multi-stroke keys
-        keymap_notepad[ "C-X" ] = keymap.defineMultiStrokeKeymap("C-X")
+        keymap_app[ "C-X" ] = keymap.defineMultiStrokeKeymap("C-X")
 
-        keymap_notepad[ "C-P" ] = "Up"                  # Move cursor up
-        keymap_notepad[ "C-N" ] = "Down"                # Move cursor down
-        keymap_notepad[ "C-F" ] = "Right"               # Move cursor right
-        keymap_notepad[ "C-B" ] = "Left"                # Move cursor left
-        keymap_notepad[ "C-A" ] = "Home"                # Move to beginning of line
-        keymap_notepad[ "C-E" ] = "End"                 # Move to end of line
-        keymap_notepad[ "A-F" ] = "C-Right"             # Word right
-        keymap_notepad[ "A-B" ] = "C-Left"              # Word left
-        keymap_notepad[ "C-V" ] = "PageDown"            # Page down
-        keymap_notepad[ "A-V" ] = "PageUp"              # page up
-        keymap_notepad[ "A-Comma" ] = "C-Home"          # Beginning of the document
-        keymap_notepad[ "A-Period" ] = "C-End"          # End of the document
-        keymap_notepad[ "C-X" ][ "C-F" ] = "C-O"        # Open file
-        keymap_notepad[ "C-X" ][ "C-S" ] = "C-S"        # Save
-        keymap_notepad[ "C-X" ][ "C-W" ] = "A-F","A-A"  # Save as
-        keymap_notepad[ "C-X" ][ "U" ] = "C-Z"          # Undo
-        keymap_notepad[ "C-S" ] = "C-F"                 # Search
-        keymap_notepad[ "A-X" ] = "C-G"                 # Jump to specified line number
-        keymap_notepad[ "C-X" ][ "H" ] = "C-A"          # Select all
-        keymap_notepad[ "C-W" ] = "C-X"                 # Cut
-        keymap_notepad[ "A-W" ] = "C-C"                 # Copy
-        keymap_notepad[ "C-Y" ] = "C-V"                 # Paste
-        keymap_notepad[ "C-X" ][ "C-C" ] = "A-F4"       # Exit
+        keymap_app[ "C-P" ] = "Up"                  # Move cursor up
+        keymap_app[ "C-N" ] = "Down"                # Move cursor down
+        keymap_app[ "C-F" ] = "Right"               # Move cursor right
+        keymap_app[ "C-B" ] = "Left"                # Move cursor left
+        keymap_app[ "C-A" ] = "Home"                # Move to beginning of line
+        keymap_app[ "C-E" ] = "End"                 # Move to end of line
+        keymap_app[ "A-F" ] = "C-Right"             # Word right
+        keymap_app[ "A-B" ] = "C-Left"              # Word left
+        keymap_app[ "C-V" ] = "PageDown"            # Page down
+        keymap_app[ "A-V" ] = "PageUp"              # page up
+        keymap_app[ "A-Comma" ] = "C-Home"          # Beginning of the document
+        keymap_app[ "A-Period" ] = "C-End"          # End of the document
+        keymap_app[ "C-X" ][ "C-F" ] = "C-O"        # Open file
+        keymap_app[ "C-X" ][ "C-S" ] = "C-S"        # Save
+        keymap_app[ "C-X" ][ "C-W" ] = "A-F","A-A"  # Save as
+        keymap_app[ "C-X" ][ "U" ] = "C-Z"          # Undo
+        keymap_app[ "C-S" ] = "C-F"                 # Search
+        keymap_app[ "A-X" ] = "C-G"                 # Jump to specified line number
+        keymap_app[ "C-X" ][ "H" ] = "C-A"          # Select all
+        keymap_app[ "C-W" ] = "C-X"                 # Cut
+        keymap_app[ "A-W" ] = "C-C"                 # Copy
+        keymap_app[ "C-Y" ] = "C-V"                 # Paste
+        keymap_app[ "C-X" ][ "C-C" ] = "A-F4"       # Exit
+        keymap_app[ "C-Space" ] = "244"             # ZenkakuHankaku
 
 
     # Customizing clipboard history list
@@ -281,9 +287,9 @@ def configure(keymap):
 
         # Fixed phrases
         fixed_items = [
-            ( "name@server.net",     "name@server.net" ),
-            ( "Address",             "San Francisco, CA 94128" ),
-            ( "Phone number",        "03-4567-8901" ),
+            ( "mail",                "yasuhiro.phil81@gmail.com" ),
+            ( "Address",             "----" ),
+            ( "Phone number",        "----" ),
         ]
 
         # Return formatted date-time string
