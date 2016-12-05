@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export PATH=/cygdrive/c/Git/bin:~/tools/vim-for-windows/bin:${PATH}
+
+~/tools/vim-for-windows/vim80-kaoriya-win64/gvim.exe $@
