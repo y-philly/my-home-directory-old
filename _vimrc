@@ -352,7 +352,7 @@ noremap <Space>l :Tagbar<CR>
 "
 " Solarized
 "
-let g:solarized_bold = 0
+let g:solarized_bold = 1
 let g:solarized_underline = 1
 let g:solarized_italic = 0
 let g:solarized_contrast = "high"
