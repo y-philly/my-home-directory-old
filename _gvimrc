@@ -3,6 +3,8 @@
 " Yasuhiro SHIMIZU  <yasuhiro.phil81.gmail.com>
 "
 
+set enc=utf-8
+
 " color
 set background=dark
 colorscheme solarized
@@ -12,7 +14,9 @@ colorscheme solarized
 "set lines=50
 
 " font
-set guifont=DejaVu_Sans_Mono:h10:cSHIFTJIS
+set gfn=Ricty_Diminished:h11:cSHIFTJIS
+set renderoptions=type:directx,mode:5
+set antialias
 
 " GUI
 set guioptions+=a
