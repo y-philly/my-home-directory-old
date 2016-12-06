@@ -25,6 +25,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "" plugins
 "
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'cohama/agit.vim'
 NeoBundle 'fuenor/im_control.vim'
@@ -348,6 +349,15 @@ imap <buffer> <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
 let g:tagbar_sort = 0
 let g:tagbar_left = 1
 noremap <Space>l :Tagbar<CR>
+
+"
+" switch.vim
+"
+nnoremap ! :Switch<CR>
+let g:switch_custom_definitions = [
+\   ['is',   'are'  ],
+\   ['TRUE', 'FALSE'],
+\]
 
 "
 " Solarized
