@@ -25,7 +25,7 @@ def configure(keymap):
     # Customizing the display
 
     # Font
-    keymap.setFont( "DejaVu Sans Mono", 13 )
+    keymap.setFont( "Ricty Diminished", 16 )
 
     # Theme
     keymap.setTheme("black")
@@ -44,22 +44,22 @@ def configure(keymap):
         keymap_global = keymap.defineWindowKeymap()
 
         # USER0-Up/Down/Left/Right : Move active window by 10 pixel unit
-        keymap_global[ "U0-Left"  ] = keymap.MoveWindowCommand( -10, 0 )
-        keymap_global[ "U0-Right" ] = keymap.MoveWindowCommand( +10, 0 )
-        keymap_global[ "U0-Up"    ] = keymap.MoveWindowCommand( 0, -10 )
-        keymap_global[ "U0-Down"  ] = keymap.MoveWindowCommand( 0, +10 )
+        #keymap_global[ "U0-Left"  ] = keymap.MoveWindowCommand( -10, 0 )
+        #keymap_global[ "U0-Right" ] = keymap.MoveWindowCommand( +10, 0 )
+        #keymap_global[ "U0-Up"    ] = keymap.MoveWindowCommand( 0, -10 )
+        #keymap_global[ "U0-Down"  ] = keymap.MoveWindowCommand( 0, +10 )
 
         # USER0-Shift-Up/Down/Left/Right : Move active window by 1 pixel unit
-        keymap_global[ "U0-S-Left"  ] = keymap.MoveWindowCommand( -1, 0 )
-        keymap_global[ "U0-S-Right" ] = keymap.MoveWindowCommand( +1, 0 )
-        keymap_global[ "U0-S-Up"    ] = keymap.MoveWindowCommand( 0, -1 )
-        keymap_global[ "U0-S-Down"  ] = keymap.MoveWindowCommand( 0, +1 )
+        #keymap_global[ "U0-S-Left"  ] = keymap.MoveWindowCommand( -1, 0 )
+        #keymap_global[ "U0-S-Right" ] = keymap.MoveWindowCommand( +1, 0 )
+        #keymap_global[ "U0-S-Up"    ] = keymap.MoveWindowCommand( 0, -1 )
+        #keymap_global[ "U0-S-Down"  ] = keymap.MoveWindowCommand( 0, +1 )
 
         # USER0-Ctrl-Up/Down/Left/Right : Move active window to screen edges
-        keymap_global[ "U0-C-Left"  ] = keymap.MoveWindowToMonitorEdgeCommand(0)
-        keymap_global[ "U0-C-Right" ] = keymap.MoveWindowToMonitorEdgeCommand(2)
-        keymap_global[ "U0-C-Up"    ] = keymap.MoveWindowToMonitorEdgeCommand(1)
-        keymap_global[ "U0-C-Down"  ] = keymap.MoveWindowToMonitorEdgeCommand(3)
+        #keymap_global[ "U0-C-Left"  ] = keymap.MoveWindowToMonitorEdgeCommand(0)
+        #keymap_global[ "U0-C-Right" ] = keymap.MoveWindowToMonitorEdgeCommand(2)
+        #keymap_global[ "U0-C-Up"    ] = keymap.MoveWindowToMonitorEdgeCommand(1)
+        #keymap_global[ "U0-C-Down"  ] = keymap.MoveWindowToMonitorEdgeCommand(3)
 
         # Clipboard history related
         keymap_global[ "C-S-Z"   ] = keymap.command_ClipboardList     # Open the clipboard history list
@@ -75,9 +75,9 @@ def configure(keymap):
         keymap_global[ "U0-4" ] = keymap.command_RecordClear
 
 
-    # USER0-F1 : Test of launching application
-    if 0:
-        keymap_global[ "U0-F1" ] = keymap.ShellExecuteCommand( None, "notepad.exe", "", "" )
+    # USER0-F1 : Launch Cygwin64 Terminal
+    if 1:
+        keymap_global[ "U0-F1" ] = keymap.ShellExecuteCommand( None, "C:\\cygwin64\\bin\\bash", "-c ~/bin/gvim", "", "" )
 
 
     # USER0-F2 : Test of sub thread execution using JobQueue/JobItem
@@ -165,8 +165,8 @@ def configure(keymap):
             def popApplicationList():
 
                 applications = [
-                    ( "Notepad", keymap.ShellExecuteCommand( None, "notepad.exe", "", "" ) ),
-                    ( "Paint", keymap.ShellExecuteCommand( None, "mspaint.exe", "", "" ) ),
+                    ( "Cygwin64 Terminal", keymap.ShellExecuteCommand( None, "C:\\cygwin64\\bin\\mintty.exe", "-i /Cygwin-Terminal.ico -", "" ) ),
+                    ( "gvim", keymap.ShellExecuteCommand( None, "C:\\cygwin64\\bin\\bash", "-c ~/bin/gvim", "", "" ) )
                 ]
 
                 websites = [
@@ -221,7 +221,7 @@ def configure(keymap):
 
 
     # Test of text input
-    if 1:
+    if 0:
         keymap_global[ "U0-H" ] = keymap.InputTextCommand( "Hello / こんにちは" )
 
 
@@ -234,51 +234,71 @@ def configure(keymap):
         keymap_edit[ "C-K" ] = "S-End","C-X"         # Removing following text
 
 
-    # Customize some applications as Emacs-ish
-    # Because the keymap condition of keymap_edit overlaps with keymap_app,
+    # Customize Notepad as Emacs-ish
+    # Because the keymap condition of keymap_edit overlaps with keymap_notepad,
     # both these two keymaps are applied in mixed manner.
     if 1:
-        def isExceptationApp(window):
-            if window.getProcessName() in ("mintty.exe", "gvim.exe"):
-                return False
-            return True
-
-        keymap_app = keymap.defineWindowKeymap( check_func = isExceptationApp )
+        keymap_notepad = keymap.defineWindowKeymap( exe_name="notepad.exe", class_name="Edit" )
 
         # Define Ctrl-X as the first key of multi-stroke keys
-        keymap_app[ "C-X" ] = keymap.defineMultiStrokeKeymap("C-X")
+        keymap_notepad[ "C-X" ] = keymap.defineMultiStrokeKeymap("C-X")
 
-        keymap_app[ "C-P" ] = "Up"                  # Move cursor up
-        keymap_app[ "C-N" ] = "Down"                # Move cursor down
-        keymap_app[ "C-F" ] = "Right"               # Move cursor right
-        keymap_app[ "C-B" ] = "Left"                # Move cursor left
-        keymap_app[ "C-A" ] = "Home"                # Move to beginning of line
-        keymap_app[ "C-E" ] = "End"                 # Move to end of line
-        keymap_app[ "A-F" ] = "C-Right"             # Word right
-        keymap_app[ "A-B" ] = "C-Left"              # Word left
-        keymap_app[ "C-V" ] = "PageDown"            # Page down
-        keymap_app[ "A-V" ] = "PageUp"              # page up
-        keymap_app[ "C-D" ] = "Delete"              # Delete
-        keymap_app[ "C-H" ] = "Back"                # Backspace
-        keymap_app[ "C-K" ] = "S-End","C-X"         # Removing following text
-        keymap_app[ "A-Comma" ] = "C-Home"          # Beginning of the document
-        keymap_app[ "A-Period" ] = "C-End"          # End of the document
-        keymap_app[ "C-X" ][ "C-F" ] = "C-O"        # Open file
-        keymap_app[ "C-X" ][ "C-S" ] = "C-S"        # Save
-        keymap_app[ "C-X" ][ "C-W" ] = "A-F","A-A"  # Save as
-        keymap_app[ "C-X" ][ "U" ] = "C-Z"          # Undo
-        keymap_app[ "C-S" ] = "C-F"                 # Search
-        keymap_app[ "A-X" ] = "C-G"                 # Jump to specified line number
-        keymap_app[ "C-X" ][ "H" ] = "C-A"          # Select all
-        keymap_app[ "C-W" ] = "C-X"                 # Cut
-        keymap_app[ "A-W" ] = "C-C"                 # Copy
-        keymap_app[ "C-Y" ] = "C-V"                 # Paste
-        keymap_app[ "C-X" ][ "C-C" ] = "A-F4"       # Exit
-        keymap_app[ "C-Space" ] = "244"             # ZenkakuHankaku
+        keymap_notepad[ "C-P" ] = "Up"                  # Move cursor up
+        keymap_notepad[ "C-N" ] = "Down"                # Move cursor down
+        keymap_notepad[ "C-F" ] = "Right"               # Move cursor right
+        keymap_notepad[ "C-B" ] = "Left"                # Move cursor left
+        keymap_notepad[ "C-A" ] = "Home"                # Move to beginning of line
+        keymap_notepad[ "C-E" ] = "End"                 # Move to end of line
+        keymap_notepad[ "A-F" ] = "C-Right"             # Word right
+        keymap_notepad[ "A-B" ] = "C-Left"              # Word left
+        keymap_notepad[ "C-V" ] = "PageDown"            # Page down
+        keymap_notepad[ "A-V" ] = "PageUp"              # page up
+        keymap_notepad[ "A-Comma" ] = "C-Home"          # Beginning of the document
+        keymap_notepad[ "A-Period" ] = "C-End"          # End of the document
+        keymap_notepad[ "C-X" ][ "C-F" ] = "C-O"        # Open file
+        keymap_notepad[ "C-X" ][ "C-S" ] = "C-S"        # Save
+        keymap_notepad[ "C-X" ][ "C-W" ] = "A-F","A-A"  # Save as
+        keymap_notepad[ "C-X" ][ "U" ] = "C-Z"          # Undo
+        keymap_notepad[ "C-S" ] = "C-F"                 # Search
+        keymap_notepad[ "A-X" ] = "C-G"                 # Jump to specified line number
+        keymap_notepad[ "C-X" ][ "H" ] = "C-A"          # Select all
+        keymap_notepad[ "C-W" ] = "C-X"                 # Cut
+        keymap_notepad[ "A-W" ] = "C-C"                 # Copy
+        keymap_notepad[ "C-Y" ] = "C-V"                 # Paste
+        keymap_notepad[ "C-X" ][ "C-C" ] = "A-F4"       # Exit
 
+    if 1:
+        keymap_chrome = keymap.defineWindowKeymap( exe_name="chrome.exe" )
+
+        keymap_chrome[ "C-P" ] = "Up"                   # Move cursor up
+        keymap_chrome[ "C-N" ] = "Down"                 # Move cursor down
+        keymap_chrome[ "C-F" ] = "Right"                # Move cursor right
+        keymap_chrome[ "C-B" ] = "Left"                 # Move cursor left
+        keymap_chrome[ "C-A" ] = "Home"                 # Move to beginning of line
+        keymap_chrome[ "C-E" ] = "End"                  # Move to end of line
+        keymap_chrome[ "C-D" ] = "Delete"               # Delete
+        keymap_chrome[ "C-H" ] = "Back"                 # Backspace
+        keymap_chrome[ "C-K" ] = "S-End","C-X"          # Removing following text
+        keymap_chrome[ "C-S" ] = "C-F"                  # Search
+        keymap_chrome[ "C-Space" ] = "244"              # ZenkakuHankaku
+
+    if 1:
+        keymap_acrord = keymap.defineWindowKeymap( exe_name="AcroRd32.exe" )
+
+        keymap_acrord[ "C-P" ] = "Up"                   # Move cursor up
+        keymap_acrord[ "C-N" ] = "Down"                 # Move cursor down
+        keymap_acrord[ "C-F" ] = "Right"                # Move cursor right
+        keymap_acrord[ "C-B" ] = "Left"                 # Move cursor left
+        keymap_acrord[ "C-A" ] = "Home"                 # Move to beginning of line
+        keymap_acrord[ "C-E" ] = "End"                  # Move to end of line
+        keymap_acrord[ "C-D" ] = "Delete"               # Delete
+        keymap_acrord[ "C-H" ] = "Back"                 # Backspace
+        keymap_acrord[ "C-K" ] = "S-End","C-X"          # Removing following text
+        keymap_acrord[ "C-S" ] = "C-F"                  # Search
+        keymap_acrord[ "C-Space" ] = "244"              # ZenkakuHankaku
 
     # Customizing clipboard history list
-    if 1:
+    if 0:
         # Enable clipboard monitoring hook (Default:Enabled)
         keymap.clipboard_history.enableHook(True)
 
@@ -290,9 +310,9 @@ def configure(keymap):
 
         # Fixed phrases
         fixed_items = [
-            ( "mail",                "yasuhiro.phil81@gmail.com" ),
-            ( "Address",             "----" ),
-            ( "Phone number",        "----" ),
+            ( "Mail",                "yasuhiro.phil81@gmail.com" ),
+            ( "Address",             "---" ),
+            ( "Phone number",        "---" ),
         ]
 
         # Return formatted date-time string
