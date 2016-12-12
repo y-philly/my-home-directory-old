@@ -33,13 +33,16 @@ NeoBundle 'godlygeek/tabular'
 NeoBundle 'houtsnip/vim-emacscommandline'
 NeoBundle 'kana/vim-operator-user'
 NeoBundle 'kana/vim-operator-replace'
+NeoBundle 'kana/vim-smartinput'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'osyo-manga/vim-marching'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'rhysd/vim-operator-surround'
+NeoBundle 'sukima/xmledit'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neosnippet.vim'
@@ -50,8 +53,10 @@ NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'tanabe/ToggleCase-vim'
+NeoBundle 'thinca/vim-fontzoom'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'thinca/vim-visualstar'
+NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tyru/open-browser.vim'
 
@@ -359,6 +364,13 @@ let g:switch_custom_definitions = [
 \   ['is',   'are'  ],
 \   ['TRUE', 'FALSE'],
 \]
+
+"
+" vim-indent
+"
+let g:indent_guides_enable_on_vim_startup = 0
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
 
 "
 " Solarized
