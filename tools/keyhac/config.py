@@ -77,7 +77,7 @@ def configure(keymap):
 
     # USER0-F1 : Launch Cygwin64 Terminal
     if 1:
-        keymap_global[ "U0-F1" ] = keymap.ShellExecuteCommand( None, "C:\\cygwin64\\bin\\bash", "-c ~/bin/gvim", "", "" )
+        keymap_global[ "U0-F1" ] = keymap.ShellExecuteCommand( None, "C:\\cygwin64\\bin\\bash", "-c ~/bin/gvim", "", "minimized" )
 
 
     # USER0-F2 : Test of sub thread execution using JobQueue/JobItem
@@ -166,7 +166,7 @@ def configure(keymap):
 
                 applications = [
                     ( "Cygwin64 Terminal", keymap.ShellExecuteCommand( None, "C:\\cygwin64\\bin\\mintty.exe", "-i /Cygwin-Terminal.ico -", "" ) ),
-                    ( "gvim", keymap.ShellExecuteCommand( None, "C:\\cygwin64\\bin\\bash", "-c ~/bin/gvim", "", "" ) )
+                    ( "gvim", keymap.ShellExecuteCommand( None, "C:\\cygwin64\\bin\\bash", "-c ~/bin/gvim", "", "minimized" ) )
                 ]
 
                 websites = [
@@ -268,6 +268,12 @@ def configure(keymap):
         keymap_notepad[ "C-X" ][ "C-C" ] = "A-F4"       # Exit
 
     if 1:
+        keymap_keyhac = keymap.defineWindowKeymap( exe_name="keyhac.exe" )
+
+        keymap_keyhac[ "C-P" ] = "Up"                   # Move cursor up
+        keymap_keyhac[ "C-N" ] = "Down"                 # Move cursor down
+
+    if 1:
         keymap_chrome = keymap.defineWindowKeymap( exe_name="chrome.exe" )
 
         keymap_chrome[ "C-P" ] = "Up"                   # Move cursor up
@@ -299,6 +305,7 @@ def configure(keymap):
 
     if 1:
         keymap_excel = keymap.defineWindowKeymap( exe_name="EXCEL.EXE" )
+
         keymap_excel[ "C-A" ] = "Home"                  # Move to beginning of line
         keymap_excel[ "C-H" ] = "Back"                  # Backspace
         keymap_excel[ "C-K" ] = "S-End","C-X"           # Removing following text
