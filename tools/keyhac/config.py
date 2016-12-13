@@ -74,6 +74,8 @@ def configure(keymap):
         keymap_global[ "U0-3" ] = keymap.command_RecordPlay
         keymap_global[ "U0-4" ] = keymap.command_RecordClear
 
+        # ZenkakuHankaku
+        keymap_global[ "C-Space" ] = "244"
 
     # USER0-F1 : Launch Cygwin64 Terminal
     if 1:
@@ -286,7 +288,6 @@ def configure(keymap):
         keymap_chrome[ "C-H" ] = "Back"                 # Backspace
         keymap_chrome[ "C-K" ] = "S-End","C-X"          # Removing following text
         keymap_chrome[ "C-S" ] = "C-F"                  # Search
-        keymap_chrome[ "C-Space" ] = "244"              # ZenkakuHankaku
 
     if 1:
         keymap_acrord = keymap.defineWindowKeymap( exe_name="AcroRd32.exe" )
@@ -301,7 +302,6 @@ def configure(keymap):
         keymap_acrord[ "C-H" ] = "Back"                 # Backspace
         keymap_acrord[ "C-K" ] = "S-End","C-X"          # Removing following text
         keymap_acrord[ "C-S" ] = "C-F"                  # Search
-        keymap_acrord[ "C-Space" ] = "244"              # ZenkakuHankaku
 
     if 1:
         keymap_excel = keymap.defineWindowKeymap( exe_name="EXCEL.EXE" )
@@ -309,7 +309,6 @@ def configure(keymap):
         keymap_excel[ "C-A" ] = "Home"                  # Move to beginning of line
         keymap_excel[ "C-H" ] = "Back"                  # Backspace
         keymap_excel[ "C-K" ] = "S-End","C-X"           # Removing following text
-        keymap_excel[ "C-Space" ] = "244"               # ZenkakuHankaku
 
     # Customizing clipboard history list
     if 0:
