@@ -310,8 +310,21 @@ def configure(keymap):
         keymap_excel[ "C-H" ] = "Back"                  # Backspace
         keymap_excel[ "C-K" ] = "S-End","C-X"           # Removing following text
 
+    if 1:
+        keymap_java_app = keymap.defineWindowKeymap( exe_name="javaw.exe" )
+
+        keymap_java_app[ "C-P" ] = "Up"                    # Move cursor up
+        keymap_java_app[ "C-N" ] = "Down"                  # Move cursor down
+        keymap_java_app[ "C-F" ] = "Right"                 # Move cursor right
+        keymap_java_app[ "C-B" ] = "Left"                  # Move cursor left
+        keymap_java_app[ "C-A" ] = "Home"                  # Move to beginning of line
+        keymap_java_app[ "C-E" ] = "End"                   # Move to end of line
+        keymap_java_app[ "C-H" ] = "Back"                  # Backspace
+        keymap_java_app[ "C-K" ] = "S-End","C-X"           # Removing following text
+        keymap_java_app[ "C-S" ] = "C-F"                   # Search
+
     # Customizing clipboard history list
-    if 0:
+    if 1:
         # Enable clipboard monitoring hook (Default:Enabled)
         keymap.clipboard_history.enableHook(True)
 
