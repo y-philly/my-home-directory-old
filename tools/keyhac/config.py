@@ -324,7 +324,7 @@ def configure(keymap):
         keymap_java_app[ "C-S" ] = "C-F"                   # Search
 
     # Customizing clipboard history list
-    if 1:
+    if 0:
         # Enable clipboard monitoring hook (Default:Enabled)
         keymap.clipboard_history.enableHook(True)
 
